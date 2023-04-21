@@ -45,17 +45,40 @@
   }
   .snake{
     background-color: rgb(201, 201, 48);
-    border: 2px solid rgb(80, 77, 77);
-    border-radius: 10px;
+    border: 1px solid rgb(80, 77, 77);
+    border-radius: 5px;
   }
   .snake-head{
     background-color: red;
     border-radius: 10px;
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
   .food{
     
     background-image: linear-gradient(to top,yellow,green);
     border-radius: 5px;
-    border: 2px solid rgb(77, 77, 77);
+    border: 1px solid rgb(77, 77, 77);
+  }
+.btn-top{
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+.btn-middle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+}
+.btn-bottom{
+  width: 20%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+  .btn{
+    height: 40px;
+    width: 70px;
+    padding: 10px;
   }

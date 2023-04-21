@@ -6,7 +6,8 @@ let currentScore = 0
 let innerLoop;
 // snake setup 
 const gameBoard = document.getElementById('game-board')
-let snakeBody = [{x:11,y:11},{x:11,y:11},{x:11,y:11}]
+const allButton = document.querySelectorAll('.btn')
+let snakeBody = [{x:11,y:11}]
 let snakeHead = snakeBody[0]
 let snakeHeadControl = {x:0,y:0}
 let foodLocation = {x:5,y:5}
@@ -14,6 +15,52 @@ const backgroundMusic = new Audio('/gameAudio/sound5.mp3')
 const clickSound = new Audio('gameAudio/click2.mp3')
 const foodCollisionSound = new Audio('gameAudio/click4.mp3')
 const wallCollisionSound = new Audio('gameAudio/crash3.mp3')
+
+allButton.forEach((button)=>{
+    button.addEventListener('click',function(event){
+        const clickButton = event.target.innerHTML
+        if(clickButton === 'Up'){
+            if(snakeHeadControl.y === 1){
+                return
+            }
+            else{
+                snakeHeadControl.y = -1;
+                snakeHeadControl.x = 0;
+            }
+            
+        }
+        if(clickButton === 'Down'){
+            if(snakeHeadControl.y === -1){
+                return
+            }
+            else{
+                snakeHeadControl.y = 1;
+                snakeHeadControl.x = 0;
+            }
+            
+        }
+        if(clickButton === 'Left'){
+            if(snakeHeadControl.x === 1){
+                return
+            }
+            else{
+                snakeHeadControl.x = -1;
+                snakeHeadControl.y = 0;
+            }
+            
+        }
+        if(clickButton === 'Right'){
+            if(snakeHeadControl.x === -1){
+                return
+            }
+            else{
+                snakeHeadControl.x = 1;
+                snakeHeadControl.y = 0;
+            }
+            
+        }
+    })
+})
 function createfood(){
   
     const newFood = document.createElement('div')
@@ -26,6 +73,7 @@ function checkFoodCollision(){
     if(snakeHead.x === foodLocation.x && snakeHead.y === foodLocation.y){
         let randomXlocation = Math.floor((Math.random()*21) + 1);
         let randomYlocation = Math.floor((Math.random()*21) + 1);
+        let snakeLastSegment = snakeBody[snakeBody.length - 1]
         
         foodLocation.x = randomXlocation;
         foodLocation.y = randomYlocation;
@@ -33,7 +81,24 @@ function checkFoodCollision(){
         gameSpeed += 0.5
         score.innerText = currentScore
         foodCollisionSound.play()
-        console.log(foodLocation)
+        snakeBody.push(snakeLastSegment)
+    }
+}
+function checkBodyCollision(){
+    let isCollided = false;
+    for(let i=2;i<snakeBody.length;i++){
+        if((snakeBody[i].x === snakeHead.x) && (snakeBody[i].y === snakeHead.y)){
+            isCollided = true
+        }
+    }
+    if(isCollided){
+        backgroundMusic.pause()
+        wallCollisionSound.play()
+        alert('you hit the wall')
+
+        window.cancelAnimationFrame(gameLoop)
+        window.cancelAnimationFrame(innerLoop)
+        window.location.reload() 
     }
 }
 function drawSnake(){
@@ -148,6 +213,7 @@ function main(currentTime){
     drawSnake()
     checkWallCollision()
     checkFoodCollision()
+    checkBodyCollision()
     createfood()
 }
 let gameLoop = window.requestAnimationFrame(main)
