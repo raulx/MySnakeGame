@@ -18,6 +18,8 @@ const wallCollisionSound = new Audio('gameAudio/crash3.mp3')
 
 allButton.forEach((button)=>{
     button.addEventListener('click',function(event){
+        backgroundMusic.play()
+        clickSound.play()
         const clickButton = event.target.innerHTML
         if(clickButton === 'Up'){
             if(snakeHeadControl.y === 1){
