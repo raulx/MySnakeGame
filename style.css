@@ -29,12 +29,12 @@ body{
     border: 2px solid black;
 }
 @keyframes slideIn {
-    from {
-      bottom:-450px
-    }
-    to {
-      bottom:200px
-    }
+   0%{
+      top: 200%;
+   }
+   100%{
+      top: 50%;
+   }
   }
 
 .game-loader{
@@ -45,8 +45,9 @@ body{
     padding: 1rem;
     border-radius: 1rem;
     position: absolute;
-    left: 10%;
-    bottom: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
     background-color: var(--started-background-color);
     animation-name: slideIn;
     animation-duration: 1s ;
@@ -181,7 +182,7 @@ body{
     font-size: 12px;
   }
   .container{
-    height: 60vh;
+    height: 80vh;
   }
 }
 @media(max-width:300px){
@@ -192,7 +193,12 @@ body{
     left: 5%;
   }
   .title{
-    font-size: 14px;
+    font-size: 16px;
+  }
+  .title-text{
+    border: none;
+    box-shadow: none;
+    
   }
   .title-img{
     width: 75px;
