@@ -1,5 +1,5 @@
 // gameSpeed variable sets the number of times screen re-renders perSecond
-let gameSpeed = 5;
+let gameSpeed = 2;
 let prevTime = 0;
 let score = document.getElementById('score')
 let currentScore = 0
@@ -11,10 +11,11 @@ let snakeBody = [{x:11,y:11}]
 let snakeHead = snakeBody[0]
 let snakeHeadControl = {x:0,y:0}
 let foodLocation = {x:5,y:5}
-const backgroundMusic = new Audio('/gameAudio/sound5.mp3')
+const backgroundMusic = new Audio('/gameAudio/sound6.mp3')
 const clickSound = new Audio('gameAudio/click2.mp3')
 const foodCollisionSound = new Audio('gameAudio/click4.mp3')
 const wallCollisionSound = new Audio('gameAudio/crash3.mp3')
+
 
 allButton.forEach((button)=>{
     button.addEventListener('click',function(event){
@@ -80,7 +81,7 @@ function checkFoodCollision(){
         foodLocation.x = randomXlocation;
         foodLocation.y = randomYlocation;
         currentScore += 1
-        gameSpeed += 0.5
+        gameSpeed += 0.25
         score.innerText = currentScore
         foodCollisionSound.play()
         snakeBody.push(snakeLastSegment)
