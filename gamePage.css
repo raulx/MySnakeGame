@@ -43,6 +43,18 @@
     font-size: 32px;
     color: #437447;
   }
+  #volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666666;
+  }
+  #volume i{
+    transition: color 0.2s;
+  }
+  #volume i:hover{
+    color: #000000;
+  }
   .snake{
     background-color: rgb(201, 201, 48);
     border: 1px solid rgb(80, 77, 77);

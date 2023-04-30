@@ -11,16 +11,30 @@ let snakeBody = [{x:11,y:11}]
 let snakeHead = snakeBody[0]
 let snakeHeadControl = {x:0,y:0}
 let foodLocation = {x:5,y:5}
+const soundButton = document.getElementById('volume');
 const backgroundMusic = new Audio('/gameAudio/sound6.mp3')
 const clickSound = new Audio('gameAudio/click2.mp3')
 const foodCollisionSound = new Audio('gameAudio/click4.mp3')
 const wallCollisionSound = new Audio('gameAudio/crash3.mp3')
+let playSound = true;
 
+
+
+soundButton.addEventListener('click',()=>{
+    playSound = !playSound
+    let soundIcon = playSound?'fa-volume-high':'fa-volume-xmark'
+    soundButton.innerHTML = ''
+    let newSoundIcon = document.createElement('i')
+    newSoundIcon.classList.add('fa-solid')
+    newSoundIcon.classList.add(soundIcon)
+    soundButton.appendChild(newSoundIcon)
+})
 
 allButton.forEach((button)=>{
     button.addEventListener('click',function(event){
-        backgroundMusic.play()
+       
         clickSound.play()
+        playSound?backgroundMusic.play():backgroundMusic.pause()
         const clickButton = event.target.innerHTML
         if(clickButton === 'Up'){
             if(snakeHeadControl.y === 1){
@@ -153,8 +167,8 @@ document.addEventListener('keydown',function(e){
 })
 
 document.addEventListener('keydown',function(e){
-    backgroundMusic.play()
-    
+ 
+    playSound?backgroundMusic.play():backgroundMusic.pause()
     let keyPressed = e.key;
     if(keyPressed === 'ArrowUp'){
         if(snakeHeadControl.y === 1){
